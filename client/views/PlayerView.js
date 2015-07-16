@@ -5,14 +5,11 @@ var PlayerView = Backbone.View.extend({
   // see: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML5_audio_and_video
   el: '<audio controls autoplay />',
 
+  events: {
+    'ended': function() {this.model.dequeue();}
+  },
+
   initialize: function() {
-    //console.log(this.$el);
-    
-    var that = this.model; // ********* find a better way ************ //
-    this.$el.on('ended', function(){
-      console.log(that);
-      that.ended();
-    });
   },
 
   setSong: function(song){
@@ -21,7 +18,6 @@ var PlayerView = Backbone.View.extend({
   },
 
   render: function(){
-    console.log(this.model);
     return this.$el.attr('src', this.model ? this.model.get('url') : '');
   }
 
