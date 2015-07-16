@@ -15,6 +15,7 @@ var SongModel = Backbone.Model.extend({
   },
 
   ended: function(){
-    this.trigger('ended', this);
+    console.log(app.get('songQueue'));
+    app.get('songQueue').at(0).trigger('ended', this);
   }
 });

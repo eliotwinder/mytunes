@@ -18,11 +18,27 @@ var AppModel = Backbone.Model.extend({
 
     params.library.on('enqueue', function(song){
       this.get('songQueue').add(song);
+      console.log(this.get('songQueue'));
     }, this);
 
-    this.get('songQueue').on('play', function(song) {
-      this.set('currentSong', song);
-    })
+    // this.get('songQueue').on('ended', function(){
+    //   console.log('hi');
+    //   this.shift();
+    //   console.log('this')
+    //   if(this.length > 0){
+    //     this.playFirst(this.at(0));
+    //   }
+    // }, this);
+    //  debugger
+    this.get('songQueue').on('add', function(song){
+      if(this.get('songQueue').length === 1){
+        this.set('currentSong', song);
+      }
+    }, this);
   }
 
 });
+
+///in app add logic for when songqueue 
+  // gets added to
+  // when a song is finished - dequeue
